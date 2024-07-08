@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration and Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body> 
+<div class="container">
+    <form name="loginform" action="index.html" onsubmit="return validateLogin()" style="width:400px;" class="m-5 p-5">
+        <h2 class="mb-4">User Login</h2>
+        <div>
+            <label for="login_email" class="form-label">Email</label>
+            <input type="email" id="login_email" name="login_email" class="form-control" placeholder="Email" required>
+        </div>
+        <div>
+            <label for="login_password" class="form-label">Password</label>
+            <input type="password" id="login_password" name="login_password" class="form-control" placeholder="Password" required>
+        </div>
+        <div class="d-flex justify-content-center pt-4">
+            <button class="btn btn-primary" type="submit">Login</button>
+        </div>
+        <div class="d-flex justify-content-center">
+            <p> <b>Please sign again</b> <a href="login.html"> sign</a></p>
+        </div>
+    </form>
+</div>  
+<script>
+     // Login Form Validation
+     function validateLogin() {
+            let email = document.getElementById("login_email").value;
+            let password = document.getElementById("login_password").value;
+
+            if (email === "" || password === "") {
+                alert("Please enter both email and password");
+                return false;
+            }
+
+            // Check if users array exists in localStorage
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+
+            // Find user by email and password
+            let foundUser = users.find(user => user.email === email && user.password === password);
+
+            if (!foundUser) {
+                alert("Invalid email or password");
+                return false;
+            }
+
+            alert("Login successful");
+            // Optionally, you can redirect to another page after successful login
+            return true;
+        }
+</script>
+    
+</body>
